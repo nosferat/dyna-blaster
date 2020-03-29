@@ -1,0 +1,23 @@
+html {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  color: #AAA;
+  background: #000;
+}
+
+.dyna {
+  position: relative;
+  display: flex;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform: scale(3);
+}
