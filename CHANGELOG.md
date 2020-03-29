@@ -10,3 +10,11 @@
 - Add debug features: *Press key 1 => loadscene(s1)*
 
 ------
+
+## 0.0.2 - add player, implement control move player
+
+- Add core components: *Events, Vector*
+- Add sprite models: *Player*
+- Add functions: *Control the player using the keyboard*
+
+------

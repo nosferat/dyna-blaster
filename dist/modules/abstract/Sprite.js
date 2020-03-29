@@ -6,6 +6,7 @@
  * [ox] [oy] - offset position
  * [px] [py] - pixel position
  * [sx] [sy] - source position
+ * updatePos - update sprite position with each redraw
  */
 
 class Sprite {
@@ -19,6 +20,7 @@ class Sprite {
     this.oy = 0
     this.sx = sx
     this.sy = sy
+    this.updatePos = false
   }
 
   set px(px) {this.dx = (px - this.ox) / this.grid}

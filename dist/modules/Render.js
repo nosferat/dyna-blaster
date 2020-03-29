@@ -19,8 +19,11 @@ class Render {
     this.list = []
   }
 
-  update() {
+  update(time) {
     for(const sprite of this.list) {
+      if(sprite.updatePos) {
+        sprite.update(time)
+      }
       this.game.display.draw(sprite)
     }
     this.loop(time => this.update(time))
