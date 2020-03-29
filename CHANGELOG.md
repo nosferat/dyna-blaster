@@ -18,3 +18,9 @@
 - Add functions: *Control the player using the keyboard*
 
 ------
+
+## 0.0.3 - implement sprite animation
+
+- Add core components: *Animation*
+
+------
