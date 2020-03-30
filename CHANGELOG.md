@@ -24,3 +24,9 @@
 - Add core components: *Animation*
 
 ------
+
+## 0.0.4 - implement sprite collision
+
+- Add core components: *Collision*
+
+------

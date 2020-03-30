@@ -6,6 +6,7 @@
  * [ox] [oy] - offset position
  * [px] [py] - pixel position
  * [sx] [sy] - source position
+ * shape - collision area
  * updatePos - update sprite position with each redraw
  */
 
@@ -18,6 +19,7 @@ class Sprite {
     this.grid = 16
     this.ox = 0
     this.oy = 0
+    this.shape = [0, 0, 16, 16]
     this.sx = sx
     this.sy = sy
     this.updatePos = false
