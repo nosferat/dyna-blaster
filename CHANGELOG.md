@@ -30,3 +30,7 @@
 - Add core components: *Collision*
 
 ------
+
+## 0.0.5 - add get around an obstacle when a player collides
+
+------
