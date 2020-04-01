@@ -26,6 +26,7 @@ class Cotrol {
 
   hotkey(event) {
     switch(event.keyCode) {
+      case 32: this.game.events.trigger('onSetBomb'); break
       case 49: this.loadscene('s1'); break
     }
   }

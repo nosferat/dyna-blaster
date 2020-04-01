@@ -6,12 +6,13 @@
  * [ox] [oy] - offset position
  * [px] [py] - pixel position
  * [sx] [sy] - source position
- * shape - collision area
- * updatePos - update sprite position with each redraw
+ * [shape] - collision area
+ * [updatePos] - update sprite position with each redraw
+ * [zorder] - rendering order
  */
 
 class Sprite {
-  constructor(game, dx, dy, sx, sy) {
+  constructor(game, dx, dy, sx, sy, parent = null) {
     this.crop = [16, 16]
     this.dx = dx
     this.dy = dy
@@ -19,10 +20,12 @@ class Sprite {
     this.grid = 16
     this.ox = 0
     this.oy = 0
+    this.parent = parent
     this.shape = [0, 0, 16, 16]
     this.sx = sx
     this.sy = sy
     this.updatePos = false
+    this.zorder = 0
   }
 
   set px(px) {this.dx = (px - this.ox) / this.grid}
@@ -30,6 +33,12 @@ class Sprite {
 
   get px() {return this.dx * this.grid + this.ox}
   get py() {return this.dy * this.grid + this.oy}
+
+  remove() {
+    const list = this.game.render.list
+    const item = list.indexOf(this)
+    list.splice(item, 1)
+  }
 }
 
 export default Sprite

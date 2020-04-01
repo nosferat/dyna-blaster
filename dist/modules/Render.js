@@ -12,6 +12,7 @@ class Render {
 
   add(sprite) {
     this.list.push(sprite)
+    this.list.sort((a, b) => a.zorder > b.zorder ? 1 : -1)
   }
 
   clear() {

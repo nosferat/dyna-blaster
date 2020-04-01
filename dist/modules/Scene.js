@@ -4,9 +4,12 @@
 
 import Stage1 from '../stages/Stage1.js'
 
+import Player from '../sprites/Player.js'
+
 class Scene {
   constructor(game) {
     this.game = game
+    this.player = new Player(game, 2, 1, 1, 0)
     this.stages = {
       s1: new Stage1(game)
     }

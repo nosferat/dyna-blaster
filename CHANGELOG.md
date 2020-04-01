@@ -34,3 +34,11 @@
 ## 0.0.5 - add get around an obstacle when a player collides
 
 ------
+
+## 0.0.6 - add placing bombs
+
+- Add sprite models: *Bomb*
+- Add render ordering
+- Fix passing through an obstacle
+
+------

@@ -4,6 +4,7 @@ class Wall extends Sprite {
   constructor() {
     super(...arguments)
     this.name = 'wall'
+    this.zorder = 1
   }
 }
 

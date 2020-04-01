@@ -3,7 +3,6 @@ import Math from '../modules/addition/Math.js'
 
 import Bloc from '../sprites/Bloc.js'
 import Grass from '../sprites/Grass.js'
-import Player from '../sprites/Player.js'
 import Tile from '../sprites/Tile.js'
 import Wall from '../sprites/Wall.js'
 
@@ -28,6 +27,7 @@ class Stage1 extends Stage {
     ]
     this.images = {
       bloc: '../images/bloc.png',
+      bomb: '../images/bomb.png',
       grass: '../images/grass.png',
       player: '../images/player.png',
       tile: '../images/tile.png',
@@ -61,7 +61,9 @@ class Stage1 extends Stage {
     }}
 
     this.getwalls().map(item => this.add(new Wall(game, item.x, item.y, 0, 0)))
-    this.add(new Player(game, 2, 1, 1, 0))
+    this.add(this.game.scene.player)
+
+    this.game.scene.player.resetPos()
   }
 
   getwalls() {
