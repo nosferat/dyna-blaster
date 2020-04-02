@@ -12,7 +12,7 @@
  */
 
 class Sprite {
-  constructor(game, dx, dy, sx, sy, parent = null) {
+  constructor(game, dx, dy, sx, sy) {
     this.crop = [16, 16]
     this.dx = dx
     this.dy = dy
@@ -20,7 +20,6 @@ class Sprite {
     this.grid = 16
     this.ox = 0
     this.oy = 0
-    this.parent = parent
     this.shape = [0, 0, 16, 16]
     this.sx = sx
     this.sy = sy

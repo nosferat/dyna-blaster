@@ -28,6 +28,7 @@ class Stage1 extends Stage {
     this.images = {
       bloc: '../images/bloc.png',
       bomb: '../images/bomb.png',
+      fire: '../images/fire.png',
       grass: '../images/grass.png',
       player: '../images/player.png',
       tile: '../images/tile.png',

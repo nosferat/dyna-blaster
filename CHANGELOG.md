@@ -42,3 +42,10 @@
 - Fix passing through an obstacle
 
 ------
+
+## 0.0.7 - add a blast wave to bombs
+
+- Add core components: *Explosion*
+- Add sprite models: *Fire*
+
+------

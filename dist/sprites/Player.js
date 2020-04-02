@@ -2,17 +2,18 @@ import Sprite from '../modules/abstract/Sprite.js'
 
 import Animation from '../modules/Animation.js'
 import Collision from '../modules/Collision.js'
+import Explosion from '../modules/Explosion.js'
 import Vector from '../modules/Vector.js'
 
 import Bomb from './Bomb.js'
 
 class Player extends Sprite {
-  constructor() {
+  constructor(game) {
     super(...arguments)
     this.animation = new Animation(this)
     this.collision = new Collision()
+    this.explosion = new Explosion(game)
     this.vector = new Vector()
-    this.bombs = {list:[], max:1, power:1}
     this.crop = [24, 24]
     this.frames = {move:[2,1,0,1]}
     this.name = 'player'
@@ -50,21 +51,8 @@ class Player extends Sprite {
     this.animation.animate(this.frames.move.map(sx => [sx, sy]), 180, true)
   }
 
-  isBomb(dx, dy) {
-    return this.bombs.list.find(item => (item.dx === dx) && (item.dy === dy))
-  }
-
   setBomb() {
-    if(this.bombs.list.length < this.bombs.max) {
-
-      const dx = Math.round(this.dx)
-      const dy = Math.round(this.dy)
-
-      if(!this.isBomb(dx, dy)) { // this place not taken by other bombs
-
-        this.game.render.add(new Bomb(this.game, dx, dy, 0, 0, this))
-      }
-    }
+    this.explosion.setBomb(this.dx, this.dy)
   }
 
   resetPos() {
