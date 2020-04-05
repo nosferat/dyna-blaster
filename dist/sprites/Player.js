@@ -5,8 +5,6 @@ import Collision from '../modules/Collision.js'
 import Explosion from '../modules/Explosion.js'
 import Vector from '../modules/Vector.js'
 
-import Bomb from './Bomb.js'
-
 class Player extends Sprite {
   constructor(game) {
     super(...arguments)

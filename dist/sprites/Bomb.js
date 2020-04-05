@@ -14,7 +14,11 @@ class Bomb extends Sprite {
   detonate(ms) {
     return new Promise(resolve => {
       this.animation.animate(this.frames, 250, true)
-      setTimeout(() => {resolve(); this.remove()}, ms)
+      setTimeout(() => {
+        resolve()
+        this.remove()
+        this.game.sound.play('../sounds/bomb.ogg')
+      }, ms)
     })
   }
 }

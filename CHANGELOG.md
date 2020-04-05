@@ -53,3 +53,10 @@
 ## 0.0.8 - add wall destruction
 
 ------
+
+## 0.0.9 - add audio controller
+
+- Add core components: *Sound*
+- Add audio effects when exploding
+
+------

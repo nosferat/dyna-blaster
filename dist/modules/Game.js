@@ -7,6 +7,7 @@ import Display from './Display.js'
 import Events from './Events.js'
 import Render from './Render.js'
 import Scene from './Scene.js'
+import Sound from './Sound.js'
 
 class Game {
   constructor(elem) {
@@ -16,6 +17,7 @@ class Game {
     this.events = new Events()
     this.render = new Render(this)
     this.scene = new Scene(this)
+    this.sound = new Sound()
   }
 
   start() {
