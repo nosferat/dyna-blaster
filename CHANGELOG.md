@@ -49,3 +49,7 @@
 - Add sprite models: *Fire*
 
 ------
+
+## 0.0.8 - add wall destruction
+
+------

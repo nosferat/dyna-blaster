@@ -6,14 +6,14 @@ class Fire extends Sprite {
   constructor() {
     super(...arguments)
     this.animation = new Animation(this)
-    this.frames = {doom:[2,1,0,1,2,3]}
+    this.frames = [1,0,1,2,3].map(sx => [sx, this.sy])
     this.name = 'fire'
     this.zorder = 1
-    this.detonate(this.sy)
+    this.destroy()
   }
 
-  detonate(sy) {
-    this.animation.animate(this.frames.doom.map(sx => [sx, sy]), 75, false, () => this.remove())
+  destroy() {
+    this.animation.animate(this.frames, 75, false, () => this.remove())
   }
 }
 

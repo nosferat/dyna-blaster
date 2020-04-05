@@ -14,7 +14,7 @@ class Explosion {
     this.timer = 3000
   }
 
-  walkable(items) {
+  canPropagate(items) {
     return !items.some(item => ['bloc', 'wall', 'tile'].includes(item.name))
   }
 
@@ -59,11 +59,16 @@ class Explosion {
       const dx = cx + direction[i][0]
       const dy = cy + direction[i][1]
 
-      const sprites = this.game.render.find(dx, dy)
+      const cell = this.game.render.find(dx, dy)
 
-      if(this.walkable(sprites)) {
+      for(let item of cell) {
+        if(item.name === 'wall') {
+          item.destroy()
+        }
+      }
 
-        this.game.render.add(new Fire(this.game, dx, dy, 0, i))
+      if(this.canPropagate(cell)) {
+        this.game.render.add(new Fire(this.game, dx, dy, 2, i))
       }
     }
   }

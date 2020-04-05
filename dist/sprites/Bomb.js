@@ -6,14 +6,14 @@ class Bomb extends Sprite {
   constructor() {
     super(...arguments)
     this.animation = new Animation(this)
-    this.frames = {doom:[1,2,0]}
+    this.frames = [1,2,0].map(sx => [sx, 0])
     this.name = 'bomb'
     this.zorder = 1
   }
 
   detonate(ms) {
     return new Promise(resolve => {
-      this.animation.animate(this.frames.doom.map(sx => [sx, 0]), 250, true)
+      this.animation.animate(this.frames, 250, true)
       setTimeout(() => {resolve(); this.remove()}, ms)
     })
   }

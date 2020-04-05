@@ -17,7 +17,6 @@ class Animation {
 
   stop() {
     this.running = false
-    this.complete()
   }
 
   nextFrame() {
@@ -32,7 +31,8 @@ class Animation {
         this.start = 0
       }
       else {
-        this.stop()
+        this.running = false
+        this.complete()
       }
     }
   }
