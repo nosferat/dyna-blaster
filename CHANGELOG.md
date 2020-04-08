@@ -60,3 +60,7 @@
 - Add audio effects when exploding
 
 ------
+
+## 0.0.10 - add explosion power
+
+------
