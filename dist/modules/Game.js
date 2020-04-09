@@ -8,6 +8,7 @@ import Events from './Events.js'
 import Render from './Render.js'
 import Scene from './Scene.js'
 import Sound from './Sound.js'
+import './addition/Math.js'
 
 class Game {
   constructor(elem) {

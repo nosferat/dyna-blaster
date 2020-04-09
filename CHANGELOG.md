@@ -64,3 +64,9 @@
 ## 0.0.10 - add explosion power
 
 ------
+
+## 0.0.11 - add bots
+
+- Add sprite models: *Ball*
+
+------

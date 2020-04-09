@@ -1,6 +1,6 @@
 import Stage from '../modules/abstract/Stage.js'
-import Math from '../modules/addition/Math.js'
 
+import Ball from '../sprites/Ball.js'
 import Bloc from '../sprites/Bloc.js'
 import Grass from '../sprites/Grass.js'
 import Tile from '../sprites/Tile.js'
@@ -9,6 +9,7 @@ import Wall from '../sprites/Wall.js'
 class Stage1 extends Stage {
   constructor() {
     super(...arguments)
+    this.botscount = 3
     this.wallcount = 32
     this.map = [
       [12, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 10],
@@ -26,6 +27,7 @@ class Stage1 extends Stage {
       [13, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 11],
     ]
     this.images = {
+      ball: '../images/ball.png',
       bloc: '../images/bloc.png',
       bomb: '../images/bomb.png',
       fire: '../images/fire.png',
@@ -61,34 +63,37 @@ class Stage1 extends Stage {
       }
     }}
 
-    this.getwalls().map(item => this.add(new Wall(game, item.x, item.y, 0, 0)))
     this.add(this.game.scene.player)
-
     this.game.scene.player.resetPos()
+    this.addwalls()
   }
 
-  getwalls() {
+  addwalls() {
     const rows = this.map[0].length
     const cols = this.map.length
-    const empty = []
-    const walls = []
+    const free = []
 
     for(let y = 0; y < cols; y++) {
     for(let x = 0; x < rows; x++) {
       switch(this.map[y][x]) {
-        case 1: empty.push({x, y}); break
-        case 2: empty.push({x, y}); break
+        case 1: free.push([x, y]); break
+        case 2: free.push([x, y]); break
       }
     }}
 
     for(let i = 0; i < this.wallcount; i++) {
-      const rand = Math.intRand(0, empty.length - 1)
-      const x = empty[rand].x
-      const y = empty[rand].y
-      walls.push({x, y})
-      empty.splice(rand, 1)
+      this.add(new Wall(this.game, ...this.posRand(free), 0, 0));
     }
-    return walls
+
+    for(let i = 0; i < this.botscount; i++) {
+      this.add(new Ball(this.game, ...this.posRand(free), 0, 0));
+    }
+  }
+
+  posRand(array) {
+    const last = array.length - 1
+    const rand = Math.intRand(0, last)
+    return array.splice(rand, 1)[0]
   }
 }
 
