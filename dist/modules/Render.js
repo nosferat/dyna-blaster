@@ -7,7 +7,9 @@ class Render {
     this.game = game
     this.list = []
     this.loop = requestAnimationFrame.bind(window)
-    this.loop(time => this.update(time))
+    this.stop = cancelAnimationFrame.bind(window)
+    this.update(0)
+    this.game.events.add('onToggPause', e => this.toggPause(e))
   }
 
   add(sprite) {
@@ -24,14 +26,18 @@ class Render {
     this.list = []
   }
 
-  update(time) {
+  toggPause(e) {
+    e.paused ? this.stop(this.id) : this.update(0, true)
+  }
+
+  update(time, sync) {
     for(const sprite of this.list) {
       if(sprite.updatePos) {
-        sprite.update(time)
+        sprite.update(time, sync)
       }
       this.game.display.draw(sprite)
     }
-    this.loop(time => this.update(time))
+    this.id = this.loop(time => this.update(time))
   }
 }
 

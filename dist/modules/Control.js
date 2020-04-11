@@ -8,8 +8,11 @@ class Cotrol {
   constructor(game) {
     this.game = game
     this.list = []
+    this.paused = false
+    this.resume = true
     document.addEventListener('keydown', e => this.update(e, true))
     document.addEventListener('keyup', e => this.update(e, false))
+    document.addEventListener('visibilitychange', e => this.onToggPause())
   }
 
   update(event, pressed) {
@@ -27,6 +30,7 @@ class Cotrol {
   hotkey(event) {
     switch(event.keyCode) {
       case 32: this.game.events.trigger('onSetBomb'); break
+      case 80: this.onToggPause(true); break
       case 49: this.loadscene('s1'); break
     }
   }
@@ -41,6 +45,20 @@ class Cotrol {
     this.game.events.trigger('onChangeMove', {
       direction: this.list.slice(-1)[0]
     })
+  }
+
+  onToggPause(iskey) {
+    if(iskey) this.resume = !this.resume
+
+    if(this.paused) {
+      if(this.resume) {
+        this.paused = false
+      }
+    }
+    else {
+      this.paused = true
+    }
+    this.game.events.trigger('onToggPause', {paused: this.paused})
   }
 
   loadscene(name) {

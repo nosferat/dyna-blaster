@@ -57,7 +57,9 @@ class Player extends Sprite {
     Object.assign(this, {dx:2, dy:1, sx:1, sy:0})
   }
 
-  update(time) {
+  update(time, sync) {
+    if(this.start === 0 || sync) this.start = time
+
     this.mx = (time - this.start) * this.vector.x / 1000 // movement x
     this.my = (time - this.start) * this.vector.y / 1000
 

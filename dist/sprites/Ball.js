@@ -33,7 +33,9 @@ class Ball extends Sprite {
     this.animation.animate(this.frames.map(sx => [sx, 0]), 250, true)
   }
 
-  update(time) {
+  update(time, sync) {
+    if(this.start === 0 || sync) this.start = time
+    
     this.mx = (time - this.start) * this.vector.x / 1000 // movement x
     this.my = (time - this.start) * this.vector.y / 1000
 

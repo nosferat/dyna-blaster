@@ -70,3 +70,9 @@
 - Add sprite models: *Ball*
 
 ------
+
+## 0.0.12 - add pause function to the game
+
+- Fix bots position in the background rendering
+
+------

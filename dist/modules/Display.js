@@ -9,6 +9,7 @@ class Display {
     this.h = h
     this.canvas = this.createCanvas()
     this.context = this.canvas.getContext('2d')
+    this.context.imageSmoothingEnabled = false
     this.images = {}
   }
 
