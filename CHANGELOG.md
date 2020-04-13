@@ -76,3 +76,9 @@
 - Fix bots position in the background rendering
 
 ------
+
+## 0.0.13 - add description file
+
+- Add sections: *Control, Rounds, Enemies, Bonuses*
+
+------
