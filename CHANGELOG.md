@@ -82,3 +82,9 @@
 - Add sections: *Control, Rounds, Enemies, Bonuses*
 
 ------
+
+## 0.0.14 - add player destruction and bots destruction
+
+- Add control of overlap force in the case of a collision with the enemy
+
+------

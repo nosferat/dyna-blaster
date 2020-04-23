@@ -27,14 +27,14 @@ class Stage1 extends Stage {
       [13, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 11],
     ]
     this.images = {
-      ball: '../images/ball.png',
-      bloc: '../images/bloc.png',
-      bomb: '../images/bomb.png',
-      fire: '../images/fire.png',
-      grass: '../images/grass.png',
-      player: '../images/player.png',
-      tile: '../images/tile.png',
-      wall: '../images/wall.png',
+      ball: './images/ball.png',
+      bloc: './images/bloc.png',
+      bomb: './images/bomb.png',
+      fire: './images/fire.png',
+      grass: './images/grass.png',
+      player: './images/player.png',
+      tile: './images/tile.png',
+      wall: './images/wall.png',
     }
   }
 
@@ -64,7 +64,7 @@ class Stage1 extends Stage {
     }}
 
     this.add(this.game.scene.player)
-    this.game.scene.player.resetPos()
+    this.game.scene.player.reset()
     this.addwalls()
   }
 

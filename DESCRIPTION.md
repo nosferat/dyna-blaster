@@ -5,6 +5,7 @@
 - Space - set bomb
 - P - pause
 - F - fullscreen
+- M - mute
 - Alt - remote bomb explosion
 
 ### Rounds:

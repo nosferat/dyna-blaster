@@ -3,18 +3,28 @@
  */
 
 class Collision {
+  constructor(game) {
+    this.game = game
+  }
 
-  detection(sprite, list, filter = []) {
-    const collisions = []
+  detection(sprite, groups) {
+    const collisions = {}
 
-    for(let item of list) {
-      const compare = filter.includes(item.name)
+    for(let item of this.game.render.list) {
 
-      if(compare) {
-        const overlap = this.overlap(sprite, item)
+      for(let i in groups) {
+        const compare = groups[i].includes(item.name)
 
-        if(overlap.detected) {
-          collisions.push(overlap)
+        if(compare) {
+          const overlap = this.overlap(sprite, item)
+
+          overlap.px = sprite.px
+          overlap.py = sprite.py
+
+          if(overlap.detected) {
+            collisions[i] = collisions[i] || []
+            collisions[i].push(overlap)
+          }
         }
       }
     }
@@ -50,7 +60,7 @@ class Collision {
     const top = rect.a.y1 - rect.b.y2
     const bottom = rect.a.y2 - rect.b.y1
 
-    return {detected, left, right, top, bottom, sprite: b}
+    return {detected, left, right, top, bottom}
   }
 }
 

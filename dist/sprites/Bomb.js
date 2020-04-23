@@ -17,7 +17,7 @@ class Bomb extends Sprite {
       setTimeout(() => {
         resolve()
         this.remove()
-        this.game.sound.play('../sounds/bomb.ogg')
+        this.game.sound.play('./sounds/bomb.ogg')
       }, ms)
     })
   }

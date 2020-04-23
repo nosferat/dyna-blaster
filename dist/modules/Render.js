@@ -17,6 +17,10 @@ class Render {
     this.list.sort((a, b) => a.zorder > b.zorder ? 1 : -1)
   }
 
+  remove(sprite) {
+    this.list.splice(this.list.indexOf(sprite), 1)
+  }
+
   find(dx, dy) {
     return this.list.filter(item => Math.round(item.dx) === dx && Math.round(item.dy) === dy)
   }
