@@ -1,19 +1,13 @@
-import Sprite from '../modules/abstract/Sprite.js'
+import Body from '../modules/abstract/Body.js'
 
-import Animation from '../modules/Animation.js'
-import Collision from '../modules/Collision.js'
 import Explosion from '../modules/Explosion.js'
-import Vector from '../modules/Vector.js'
 
-class Player extends Sprite {
+class Player extends Body {
   constructor(game) {
     super(...arguments)
-    this.animation = new Animation(this)
-    this.collision = new Collision(game)
     this.explosion = new Explosion(game)
-    this.vector = new Vector()
     this.crop = [24, 24]
-    this.enemies = ['ball', 'fire']
+    this.enemies = ['ballom', 'boyon', 'ekutopu', 'fire']
     this.frames = {move:[2,1,0,1], doom:[0,1,0,1,0,1,2,3,4,5,6,7,8].map(sx => [sx, 4])}
     this.name = 'player'
     this.obstacles = ['bloc', 'tile', 'wall']
@@ -23,8 +17,6 @@ class Player extends Sprite {
     this.running = true
     this.shape = [4, 6, 16, 16]
     this.speed = 40
-    this.start = 0
-    this.updatePos = true
     this.zorder = 3
     this.game.events.add('onSetBomb', e => this.setBomb(e))
     this.game.events.add('onChangeMove', e => this.setDirection(e))
@@ -102,7 +94,10 @@ class Player extends Sprite {
 
       if(collision.obstacles.length >= 2) return  // go around only one obstacle.
 
-      [px, py] = this.getAround(collision.obstacles[0], mx, my, this.rounding)
+      const approximation = this.getAround(collision.obstacles[0], mx, my, this.rounding)
+
+      px = approximation.px
+      py = approximation.py
     }
 
     this.px = px

@@ -88,3 +88,9 @@
 - Add control of overlap force in the case of a collision with the enemy
 
 ------
+
+## 0.0.15 - add new bots
+
+- Add sprite models: *Boyon, Ekutopu*
+
+------

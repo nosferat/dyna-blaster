@@ -4,7 +4,7 @@
 
 import Stage1 from '../stages/Stage1.js'
 
-import Player from '../sprites/Player.js'
+import Player from '../bots/Player.js'
 
 class Scene {
   constructor(game) {

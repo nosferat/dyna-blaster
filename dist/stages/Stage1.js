@@ -1,15 +1,19 @@
 import Stage from '../modules/abstract/Stage.js'
 
-import Ball from '../sprites/Ball.js'
 import Bloc from '../sprites/Bloc.js'
 import Grass from '../sprites/Grass.js'
 import Tile from '../sprites/Tile.js'
 import Wall from '../sprites/Wall.js'
 
+import Ballom from '../bots/Ballom.js'
+import Boyon from '../bots/Boyon.js'
+import Ekutopu from '../bots/Ekutopu.js'
+
 class Stage1 extends Stage {
   constructor() {
     super(...arguments)
-    this.botscount = 3
+    this.botscount = {ballom:2, boyon:1, ekutopu:1}
+    this.emptycell = []
     this.wallcount = 32
     this.map = [
       [12, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 10],
@@ -27,9 +31,11 @@ class Stage1 extends Stage {
       [13, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 11],
     ]
     this.images = {
-      ball: './images/ball.png',
+      ballom: './images/ballom.png',
       bloc: './images/bloc.png',
       bomb: './images/bomb.png',
+      boyon: './images/boyon.png',
+      ekutopu: './images/ekutopu.png',
       fire: './images/fire.png',
       grass: './images/grass.png',
       player: './images/player.png',
@@ -63,31 +69,45 @@ class Stage1 extends Stage {
       }
     }}
 
-    this.add(this.game.scene.player)
-    this.game.scene.player.reset()
-    this.addwalls()
-  }
-
-  addwalls() {
-    const rows = this.map[0].length
-    const cols = this.map.length
-    const free = []
+    this.emptycell = []
 
     for(let y = 0; y < cols; y++) {
     for(let x = 0; x < rows; x++) {
       switch(this.map[y][x]) {
-        case 1: free.push([x, y]); break
-        case 2: free.push([x, y]); break
+        case 1: this.emptycell.push([x, y]); break
+        case 2: this.emptycell.push([x, y]); break
       }
     }}
 
-    for(let i = 0; i < this.wallcount; i++) {
-      this.add(new Wall(this.game, ...this.posRand(free), 0, 0));
-    }
+    this.addwalls()
+    this.addbots()
+    this.game.scene.player.reset()
+  }
 
-    for(let i = 0; i < this.botscount; i++) {
-      this.add(new Ball(this.game, ...this.posRand(free), 0, 0));
+  addwalls() {
+    for(let i = 0; i < this.wallcount; i++) {
+      this.add(new Wall(this.game, ...this.posRand(this.emptycell), 0, 0))
     }
+  }
+
+  addbots() {
+    for(let i in this.botscount) {
+    for(let j = 0; j < this.botscount[i]; j++) {
+  
+      switch(i) {
+        case 'ballom':
+          this.add(new Ballom(this.game, ...this.posRand(this.emptycell), 0, 0))
+        break
+        case 'boyon':
+          this.add(new Boyon(this.game, ...this.posRand(this.emptycell), 0, 0))
+        break
+        case 'ekutopu':
+          this.add(new Ekutopu(this.game, ...this.posRand(this.emptycell), 0, 0))
+        break
+      }
+    }}
+
+    this.add(this.game.scene.player)
   }
 
   posRand(array) {

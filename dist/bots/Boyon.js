@@ -1,26 +1,16 @@
-import Sprite from '../modules/abstract/Sprite.js'
+import Body from '../modules/abstract/Body.js'
 
-import Animation from '../modules/Animation.js'
-import Collision from '../modules/Collision.js'
-import Vector from '../modules/Vector.js'
-
-class Ball extends Sprite {
-  constructor(game) {
+class Boyon extends Body {
+  constructor() {
     super(...arguments)
-    this.animation = new Animation(this)
-    this.collision = new Collision(game)
-    this.vector = new Vector()
     this.crop = [18, 18]
-    this.enemies = ['fire']
-    this.frames = {move:[1,2,1,0], doom:[0,0,1,2,3,4].map(sx => [sx, 1])}
-    this.name = 'ball'
+    this.frames = {move:[1,2,1,0], doom:[0,0,1,2,3,4,5,6].map(sx => [sx, 1])}
+    this.name = 'boyon'
     this.obstacles = ['bloc', 'bomb', 'tile', 'wall']
     this.ox = -1
     this.oy = -2
     this.shape = [1, 2, 16, 16]
     this.speed = 18
-    this.start = 0
-    this.updatePos = true
     this.zorder = 2
     this.lookAt()
     this.setDirection('R')
@@ -60,24 +50,38 @@ class Ball extends Sprite {
       const ox = overlap.x >= this.overlap.min
       const oy = overlap.y >= this.overlap.min
 
-      if(ox && oy) this.destroy()
+      if(ox && oy) this.destroy() // min overlap passed
     }
-    
+
     if(collision.obstacles) {
 
-      const direction = ['R', 'D', 'L', 'U'][Math.intRand(0, 3)]
+      const approximation = this.getAround(collision.obstacles[0], mx, my, this.rounding)
 
-      this.setDirection(direction)
+      px = approximation.px
+      py = approximation.py
 
-      if(px < this.px) px = Math.round(px - collision.obstacles[0].left)
-      if(py < this.py) py = Math.round(py - collision.obstacles[0].top)
-      if(px > this.px) px = Math.round(px - collision.obstacles[0].right)
-      if(py > this.py) py = Math.round(py - collision.obstacles[0].bottom)
+      if(approximation.missing) { // change direction when collision if there isn't rounding
+
+        this.setDirection(['R', 'D', 'L', 'U'][Math.intRand(0, 3)])
+      }
     }
-    
+
+    else if(time - this.timer >= this.delay) { // сhange direction after x seconds
+        
+      this.delay = Math.intRand(this.waiting.min, this.waiting.max)
+      this.timer = time
+
+      switch(this.vector.direction) {
+        case 'R': this.setDirection(['D', 'U'][Math.intRand(0, 1)]); break
+        case 'D': this.setDirection(['R', 'L'][Math.intRand(0, 1)]); break
+        case 'L': this.setDirection(['D', 'U'][Math.intRand(0, 1)]); break
+        case 'U': this.setDirection(['R', 'L'][Math.intRand(0, 1)]); break
+      }
+    }
+
     this.px = px
     this.py = py
   }
 }
 
-export default Ball
+export default Boyon
