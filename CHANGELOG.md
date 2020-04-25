@@ -94,3 +94,10 @@
 - Add sprite models: *Boyon, Ekutopu*
 
 ------
+
+## 0.0.16 - add portal and bonuses
+
+- Add core components: *Bonuses*
+- Add sprite models: *Bonus, Portal*
+
+------

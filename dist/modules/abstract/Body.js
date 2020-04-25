@@ -21,6 +21,7 @@ class Body extends Sprite {
     this.timer = 0
     this.updatePos = true
     this.waiting = {min: 3000, max: 10000}
+    this.zorder = 3
   }
 
   getOverlap(collision) {

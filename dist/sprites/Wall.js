@@ -8,7 +8,7 @@ class Wall extends Sprite {
     this.animation = new Animation(this)
     this.frames = [1,2,3,4,5,6,7].map(sx => [sx, 0])
     this.name = 'wall'
-    this.zorder = 1
+    this.zorder = 2
   }
 
   destroy() {

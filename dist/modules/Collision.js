@@ -60,7 +60,7 @@ class Collision {
     const top = rect.a.y1 - rect.b.y2
     const bottom = rect.a.y2 - rect.b.y1
 
-    return {detected, left, right, top, bottom}
+    return {detected, left, right, top, bottom, target:b}
   }
 }
 

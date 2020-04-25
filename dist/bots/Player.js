@@ -1,11 +1,13 @@
 import Body from '../modules/abstract/Body.js'
 
+import Bonuses from '../modules/Bonuses.js'
 import Explosion from '../modules/Explosion.js'
 
 class Player extends Body {
   constructor(game) {
     super(...arguments)
     this.explosion = new Explosion(game)
+    this.bonuses = new Bonuses(this)
     this.crop = [24, 24]
     this.enemies = ['ballom', 'boyon', 'ekutopu', 'fire']
     this.frames = {move:[2,1,0,1], doom:[0,1,0,1,0,1,2,3,4,5,6,7,8].map(sx => [sx, 4])}
@@ -17,7 +19,7 @@ class Player extends Body {
     this.running = true
     this.shape = [4, 6, 16, 16]
     this.speed = 40
-    this.zorder = 3
+    this.zorder = 4
     this.game.events.add('onSetBomb', e => this.setBomb(e))
     this.game.events.add('onChangeMove', e => this.setDirection(e))
   }
@@ -57,7 +59,8 @@ class Player extends Body {
   }
 
   reset() {
-    this.vector.set(null, 0)
+    this.bonuses.reset()
+    this.vector.set('', 0)
     this.dx = 2
     this.dy = 1
     this.sx = 1
@@ -79,7 +82,7 @@ class Player extends Body {
 
     const obstacles = this.obstacles
     const enemies = this.enemies
-    const collision = this.collision.detection({px, py, shape: this.shape}, {obstacles, enemies})
+    const collision = this.collision.detection({px, py, shape: this.shape}, {obstacles, enemies, bonuses:['bonus']})
 
     if(collision.enemies) {
 
@@ -98,6 +101,18 @@ class Player extends Body {
 
       px = approximation.px
       py = approximation.py
+    }
+
+    if(collision.bonuses) {
+
+      const overlap = this.getOverlap(collision.bonuses)
+      const ox = overlap.x >= this.overlap.min
+      const oy = overlap.y >= this.overlap.min
+
+      if(ox && oy) {
+        const bonus = collision.bonuses[0].target.take()
+        this.bonuses.add(bonus)
+      }
     }
 
     this.px = px

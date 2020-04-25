@@ -11,7 +11,6 @@ class Boyon extends Body {
     this.oy = -2
     this.shape = [1, 2, 16, 16]
     this.speed = 18
-    this.zorder = 2
     this.lookAt()
     this.setDirection('R')
   }

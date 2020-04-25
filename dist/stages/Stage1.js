@@ -9,12 +9,15 @@ import Ballom from '../bots/Ballom.js'
 import Boyon from '../bots/Boyon.js'
 import Ekutopu from '../bots/Ekutopu.js'
 
+import Bonus from '../sprites/Bonus.js'
+import Portal from '../sprites/Portal.js'
+
 class Stage1 extends Stage {
   constructor() {
     super(...arguments)
     this.botscount = {ballom:2, boyon:1, ekutopu:1}
-    this.emptycell = []
     this.wallcount = 32
+    this.bonuses = ['bomb', 'bombpass', 'fire', 'life', 'remote', 'speed', 'vest', 'wallpass']
     this.map = [
       [12, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 10],
       [12, 8, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 10],
@@ -34,11 +37,13 @@ class Stage1 extends Stage {
       ballom: './images/ballom.png',
       bloc: './images/bloc.png',
       bomb: './images/bomb.png',
+      bonus: './images/bonus.png',
       boyon: './images/boyon.png',
       ekutopu: './images/ekutopu.png',
       fire: './images/fire.png',
       grass: './images/grass.png',
       player: './images/player.png',
+      portal: './images/portal.png',
       tile: './images/tile.png',
       wall: './images/wall.png',
     }
@@ -70,6 +75,7 @@ class Stage1 extends Stage {
     }}
 
     this.emptycell = []
+    this.undercell = []
 
     for(let y = 0; y < cols; y++) {
     for(let x = 0; x < rows; x++) {
@@ -80,30 +86,48 @@ class Stage1 extends Stage {
     }}
 
     this.addwalls()
+    this.addbonus()
     this.addbots()
+    this.addportal()
     this.game.scene.player.reset()
   }
 
   addwalls() {
-    for(let i = 0; i < this.wallcount; i++) {
-      this.add(new Wall(this.game, ...this.posRand(this.emptycell), 0, 0))
+    for(let i = 0; i < this.wallcount; i++) {      
+      const coord = this.posRand(this.emptycell)
+      this.undercell.push(coord)
+      this.add(new Wall(this.game, ...coord, 0, 0))
     }
+  }
+
+  addbonus() {
+    for(let bonus of this.bonuses) {
+      const coord = this.posRand(this.undercell)
+      switch(bonus) {
+        case 'bomb': this.add(new Bonus(this.game, ...coord, 0, 1)); break
+        case 'bombpass': this.add(new Bonus(this.game, ...coord, 0, 4)); break
+        case 'fire': this.add(new Bonus(this.game, ...coord, 0, 0)); break
+        case 'life': this.add(new Bonus(this.game, ...coord, 0, 7)); break
+        case 'remote': this.add(new Bonus(this.game, ...coord, 0, 2)); break
+        case 'speed': this.add(new Bonus(this.game, ...coord, 0, 3)); break
+        case 'vest': this.add(new Bonus(this.game, ...coord, 0, 6)); break
+        case 'wallpass': this.add(new Bonus(this.game, ...coord, 0, 5)); break
+      }
+    }
+  }
+
+  addportal() {
+    this.add(new Portal(this.game, ...this.posRand(this.undercell), 0, 0))
   }
 
   addbots() {
     for(let i in this.botscount) {
     for(let j = 0; j < this.botscount[i]; j++) {
-  
+      const coord = this.posRand(this.emptycell)
       switch(i) {
-        case 'ballom':
-          this.add(new Ballom(this.game, ...this.posRand(this.emptycell), 0, 0))
-        break
-        case 'boyon':
-          this.add(new Boyon(this.game, ...this.posRand(this.emptycell), 0, 0))
-        break
-        case 'ekutopu':
-          this.add(new Ekutopu(this.game, ...this.posRand(this.emptycell), 0, 0))
-        break
+        case 'ballom': this.add(new Ballom(this.game, ...coord, 0, 0)); break
+        case 'boyon': this.add(new Boyon(this.game, ...coord, 0, 0)); break
+        case 'ekutopu': this.add(new Ekutopu(this.game, ...coord, 0, 0)); break
       }
     }}
 
