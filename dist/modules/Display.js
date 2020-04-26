@@ -39,14 +39,30 @@ class Display {
     return Promise.all(promises)
   }
 
+  text(sprite) {
+    const text = sprite.text
+
+    if(text) {      
+      const px = sprite.px + sprite.lx
+      const py = sprite.py + sprite.ly
+      const text = sprite.text
+      const font = sprite.font
+      const color = sprite.color
+
+      this.context.fillStyle = color
+      this.context.font = font
+      this.context.fillText(text, px, py)
+    }
+  }
+
   draw(sprite) {
     const image = this.images[sprite.name]
 
     if(image) {
       const ch = sprite.crop[1]
       const cw = sprite.crop[0]
-      const px = sprite.px
-      const py = sprite.py
+      const px = sprite.px + sprite.lx
+      const py = sprite.py + sprite.ly
       const sx = sprite.sx * sprite.crop[1]
       const sy = sprite.sy * sprite.crop[0]
       

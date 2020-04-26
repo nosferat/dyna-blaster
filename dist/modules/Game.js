@@ -14,7 +14,7 @@ class Game {
   constructor(elem) {
     this.parent = document.querySelector(elem)
     this.control = new Control(this)
-    this.display = new Display(this, 272, 208)
+    this.display = new Display(this, 272, 232)
     this.events = new Events()
     this.render = new Render(this)
     this.scene = new Scene(this)

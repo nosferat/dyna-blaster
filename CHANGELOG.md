@@ -101,3 +101,10 @@
 - Add sprite models: *Bonus, Portal*
 
 ------
+
+## 0.0.17 - add status bar
+
+- Add sprite models: *Status, Print*
+- Add fonts: *DynaMain*
+
+------

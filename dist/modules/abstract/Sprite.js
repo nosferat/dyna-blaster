@@ -3,6 +3,7 @@
  * 
  * [crop] - sprite size
  * [dx] [dy] - destination position
+ * [lx] [ly] - layer position (visual effect only)
  * [ox] [oy] - offset position
  * [px] [py] - pixel position
  * [sx] [sy] - source position
@@ -19,12 +20,15 @@ class Sprite {
     this.dy = dy
     this.game = game
     this.grid = 16
+    this.lx = 0
+    this.ly = 24
     this.overlap = {min: 8}
     this.ox = 0
     this.oy = 0
     this.shape = [0, 0, 16, 16]
     this.sx = sx
     this.sy = sy
+    this.text = ''
     this.updatePos = false
     this.zorder = 0
   }

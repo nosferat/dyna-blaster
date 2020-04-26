@@ -40,6 +40,7 @@ class Render {
         sprite.update(time, sync)
       }
       this.game.display.draw(sprite)
+      this.game.display.text(sprite)
     }
     this.id = this.loop(time => this.update(time))
   }

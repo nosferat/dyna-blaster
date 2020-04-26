@@ -1,16 +1,16 @@
 import Stage from '../modules/abstract/Stage.js'
 
 import Bloc from '../sprites/Bloc.js'
+import Bonus from '../sprites/Bonus.js'
 import Grass from '../sprites/Grass.js'
+import Portal from '../sprites/Portal.js'
+import Status from '../sprites/Status.js'
 import Tile from '../sprites/Tile.js'
 import Wall from '../sprites/Wall.js'
 
 import Ballom from '../bots/Ballom.js'
 import Boyon from '../bots/Boyon.js'
 import Ekutopu from '../bots/Ekutopu.js'
-
-import Bonus from '../sprites/Bonus.js'
-import Portal from '../sprites/Portal.js'
 
 class Stage1 extends Stage {
   constructor() {
@@ -44,6 +44,7 @@ class Stage1 extends Stage {
       grass: './images/grass.png',
       player: './images/player.png',
       portal: './images/portal.png',
+      status: './images/status.png',
       tile: './images/tile.png',
       wall: './images/wall.png',
     }
@@ -89,6 +90,8 @@ class Stage1 extends Stage {
     this.addbonus()
     this.addbots()
     this.addportal()
+    this.addstatus()
+
     this.game.scene.player.reset()
   }
 
@@ -132,6 +135,10 @@ class Stage1 extends Stage {
     }}
 
     this.add(this.game.scene.player)
+  }
+
+  addstatus() {
+    this.add(new Status(this.game, 0, 0, 0, 0))
   }
 
   posRand(array) {
