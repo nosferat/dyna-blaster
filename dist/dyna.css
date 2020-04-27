@@ -2,6 +2,10 @@
   font-family: 'Dyna Main'; src: url('./fonts/dyna-main.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Dyna Micro'; src: url('./fonts/dyna-micro.ttf') format('truetype');
+}
+
 html {
   position: relative;
   height: 100%;

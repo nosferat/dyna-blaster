@@ -3,24 +3,28 @@ import Sprite from '../modules/abstract/Sprite.js'
 import Print from './Print.js'
 
 class Status extends Sprite {
-  constructor(game) {
+  constructor() {
     super(...arguments)
     this.crop = [256, 24]
-    this.lx = 0
-    this.ly = 0
     this.name = 'status'
     this.ox = 8
     this.oy = 0
+    this.tx = 0
+    this.ty = 0
     this.updatePos = true
-    this.zorder = 4
-    this.clock = new Print(game, 7, 1, 0, 0)
+    this.zorder = 0
+    this.heart = new Print(this.game, 10, 1, {})
+    this.score = new Print(this.game, 16, 1, {align:'right'})
+    this.timer = new Print(this.game,  9, 1, {align:'right'})
   }
 
   update(time) {
     const min = Math.floor(time / 1000 / 60)
     const sec = Math.floor(time / 1000 % 60).toString().padStart(2,0)
 
-    this.clock.text = `${min}:${sec}`
+    this.heart.text = this.game.scene.heart
+    this.score.text = this.game.scene.score
+    this.timer.text = `${min}:${sec}`
   }
 }
 

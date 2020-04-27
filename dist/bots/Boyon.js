@@ -9,6 +9,7 @@ class Boyon extends Body {
     this.obstacles = ['bloc', 'bomb', 'tile', 'wall']
     this.ox = -1
     this.oy = -2
+    this.points = 1000
     this.shape = [1, 2, 16, 16]
     this.speed = 18
     this.lookAt()
@@ -24,7 +25,7 @@ class Boyon extends Body {
   }
 
   destroy() {
-    this.animation.animate(this.frames.doom, 250, false, () => this.remove())
+    this.animation.animate(this.frames.doom, 250, false, () => {this.setPoints(); this.remove()})
     this.updatePos = false
   }
 

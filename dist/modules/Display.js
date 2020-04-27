@@ -42,15 +42,14 @@ class Display {
   text(sprite) {
     const text = sprite.text
 
-    if(text) {      
-      const px = sprite.px + sprite.lx
-      const py = sprite.py + sprite.ly
-      const text = sprite.text
-      const font = sprite.font
-      const color = sprite.color
+    if(text !== undefined) {
+      const px = sprite.px
+      const py = sprite.py
 
-      this.context.fillStyle = color
-      this.context.font = font
+      this.context.fillStyle = sprite.color
+      this.context.font = sprite.font
+      this.context.textAlign = sprite.align
+      this.context.textBaseline = sprite.baseline
       this.context.fillText(text, px, py)
     }
   }
@@ -61,8 +60,8 @@ class Display {
     if(image) {
       const ch = sprite.crop[1]
       const cw = sprite.crop[0]
-      const px = sprite.px + sprite.lx
-      const py = sprite.py + sprite.ly
+      const px = sprite.px + sprite.tx
+      const py = sprite.py + sprite.ty
       const sx = sprite.sx * sprite.crop[1]
       const sy = sprite.sy * sprite.crop[0]
       

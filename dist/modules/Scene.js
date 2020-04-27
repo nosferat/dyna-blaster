@@ -8,8 +8,10 @@ import Player from '../bots/Player.js'
 
 class Scene {
   constructor(game) {
-    this.game = game
     this.player = new Player(game, 2, 1, 1, 0)
+    this.game = game
+    this.heart = 2
+    this.score = 0
     this.stages = {
       s1: new Stage1(game)
     }

@@ -3,10 +3,10 @@
  * 
  * [crop] - sprite size
  * [dx] [dy] - destination position
- * [lx] [ly] - layer position (visual effect only)
  * [ox] [oy] - offset position
  * [px] [py] - pixel position
  * [sx] [sy] - source position
+ * [tx] [ty] - translate position (not involved in math calculation)
  * [overlap] - min overlap in the case of a collision with the enemy
  * [shape] - collision area
  * [updatePos] - update sprite position with each redraw
@@ -20,15 +20,14 @@ class Sprite {
     this.dy = dy
     this.game = game
     this.grid = 16
-    this.lx = 0
-    this.ly = 24
     this.overlap = {min: 8}
     this.ox = 0
     this.oy = 0
     this.shape = [0, 0, 16, 16]
     this.sx = sx
     this.sy = sy
-    this.text = ''
+    this.tx = 0
+    this.ty = 24
     this.updatePos = false
     this.zorder = 0
   }

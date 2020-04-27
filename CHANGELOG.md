@@ -108,3 +108,9 @@
 - Add fonts: *DynaMain*
 
 ------
+
+## 0.0.18 - add scoring system
+
+- Add fonts: *DynaMicro*
+
+------

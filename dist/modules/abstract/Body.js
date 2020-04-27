@@ -8,6 +8,8 @@ import Animation from '../Animation.js'
 import Collision from '../Collision.js'
 import Vector from '../Vector.js'
 
+import Print from '../../sprites/Print.js'
+
 class Body extends Sprite {
   constructor(game) {
     super(...arguments)
@@ -22,6 +24,16 @@ class Body extends Sprite {
     this.updatePos = true
     this.waiting = {min: 3000, max: 10000}
     this.zorder = 3
+  }
+
+  setPoints() {
+    const print = new Print(this.game, 0, 0, {align:'center', baseline:'middle', font:'5px Dyna Micro', timeout:2000})
+
+    print.ox = this.px + this.tx + this.grid / 2 + 1
+    print.oy = this.py + this.ty + this.grid / 2 + 1
+    print.text = this.points
+
+    this.game.scene.score += this.points
   }
 
   getOverlap(collision) {
