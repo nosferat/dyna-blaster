@@ -10,7 +10,7 @@ class Player extends Body {
     this.bonuses = new Bonuses(this)
     this.crop = [24, 24]
     this.enemies = ['ballom', 'boyon', 'ekutopu', 'fire']
-    this.frames = {move:[2,1,0,1], doom:[0,1,0,1,0,1,2,3,4,5,6,7,8].map(sx => [sx, 4])}
+    this.frames = {move:[2,1,0,1], doom:[0,1,0,1,0,1,2,3,4,5,6,7,8].map(sx => [sx, 4]), teleport:[0,1,2,3]}
     this.name = 'player'
     this.obstacles = ['bloc', 'tile', 'wall']
     this.ox = -4
@@ -58,6 +58,16 @@ class Player extends Body {
     this.updatePos = false
   }
 
+  teleport(collision) {
+    this.animation.animate(this.frames.teleport.map(sx => [sx, 5]), 100, true)
+    this.running = false
+    this.updatePos = false
+    this.game.sound.play('./sounds/portal.ogg')
+    
+    this.px = collision.portal[0].target.px + this.ox
+    this.py = collision.portal[0].target.py + this.oy // auto position
+  }
+
   reset() {
     this.bonuses.reset()
     this.vector.set('', 0)
@@ -80,15 +90,17 @@ class Player extends Body {
 
     this.start = time
 
-    const obstacles = this.obstacles
     const enemies = this.enemies
-    const collision = this.collision.detection({px, py, shape: this.shape}, {obstacles, enemies, bonuses:['bonus']})
+    const bonuses = ['bonus']
+    const portal = ['portal']
+    const obstacles = this.obstacles
+    const collision = this.collision.detection({px, py, shape: this.shape}, {enemies, bonuses, portal, obstacles})
 
     if(collision.enemies) {
 
       const overlap = this.getOverlap(collision.enemies)
-      const ox = overlap.x >= this.overlap.min
-      const oy = overlap.y >= this.overlap.min
+      const ox = overlap.x >= this.overlap.default 
+      const oy = overlap.y >= this.overlap.default
 
       if(ox && oy) this.destroy()
     }
@@ -106,13 +118,22 @@ class Player extends Body {
     if(collision.bonuses) {
 
       const overlap = this.getOverlap(collision.bonuses)
-      const ox = overlap.x >= this.overlap.min
-      const oy = overlap.y >= this.overlap.min
+      const ox = overlap.x >= this.overlap.default
+      const oy = overlap.y >= this.overlap.default
 
       if(ox && oy) {
         const bonus = collision.bonuses[0].target.take()
         this.bonuses.add(bonus)
       }
+    }
+
+    if(collision.portal) {
+
+      const overlap = this.getOverlap(collision.portal)
+      const ox = overlap.x >= this.overlap.portal
+      const oy = overlap.y >= this.overlap.portal
+
+      if(ox && oy) return this.teleport(collision)
     }
 
     this.px = px

@@ -47,8 +47,8 @@ class Boyon extends Body {
     if(collision.enemies) {
 
       const overlap = this.getOverlap(collision.enemies)
-      const ox = overlap.x >= this.overlap.min
-      const oy = overlap.y >= this.overlap.min
+      const ox = overlap.x >= this.overlap.default
+      const oy = overlap.y >= this.overlap.default
 
       if(ox && oy) this.destroy() // min overlap passed
     }

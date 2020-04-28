@@ -118,3 +118,7 @@
 ## 0.0.19 - add timer
 
 ------
+
+## 0.0.20 - add teleportation
+
+------
