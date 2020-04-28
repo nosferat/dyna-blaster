@@ -9,6 +9,7 @@ class Status extends Sprite {
     this.name = 'status'
     this.ox = 8
     this.oy = 0
+    this.start = 0
     this.tx = 0
     this.ty = 0
     this.updatePos = true
@@ -18,13 +19,25 @@ class Status extends Sprite {
     this.timer = new Print(this.game,  9, 1, {align:'right'})
   }
 
-  update(time) {
+  format(time) {
+    if(time < 0) time = 0
+
     const min = Math.floor(time / 1000 / 60)
     const sec = Math.floor(time / 1000 % 60).toString().padStart(2,0)
 
+    return `${min}:${sec}`
+  }
+
+  update(time) {
+    if(this.start === 0) this.start = time
+
+    this.game.scene.current.timer -= time - this.start
+
     this.heart.text = this.game.scene.heart
     this.score.text = this.game.scene.score
-    this.timer.text = `${min}:${sec}`
+    this.timer.text = this.format(this.game.scene.current.timer)
+
+    this.start = time
   }
 }
 

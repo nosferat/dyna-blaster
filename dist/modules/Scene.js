@@ -13,13 +13,13 @@ class Scene {
     this.heart = 2
     this.score = 0
     this.stages = {
-      s1: new Stage1(game)
+      s1: function() {return new Stage1(game)}
     }
   }
 
   loadscene(name) {
     this.game.render.clear()
-    this.current = this.stages[name]
+    this.current = this.stages[name]()
     this.current.load()
   }
 }

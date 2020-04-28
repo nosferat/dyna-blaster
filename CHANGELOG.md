@@ -114,3 +114,7 @@
 - Add fonts: *DynaMicro*
 
 ------
+
+## 0.0.19 - add timer
+
+------

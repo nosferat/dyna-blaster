@@ -17,6 +17,7 @@ class Stage1 extends Stage {
     super(...arguments)
     this.botscount = {ballom:2, boyon:1, ekutopu:1}
     this.wallcount = 32
+    this.timer = 240000
     this.bonuses = ['bomb', 'bombpass', 'fire', 'life', 'remote', 'speed', 'vest', 'wallpass']
     this.map = [
       [12, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 10],

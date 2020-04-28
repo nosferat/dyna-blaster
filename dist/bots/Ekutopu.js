@@ -29,8 +29,8 @@ class Ekutopu extends Body {
     this.updatePos = false
   }
 
-  update(time, sync) {
-    if(this.start === 0 || sync) this.start = time
+  update(time) {
+    if(this.start === 0) this.start = time
     
     const mx = (time - this.start) * this.vector.x / 1000 // movement x
     const my = (time - this.start) * this.vector.y / 1000
