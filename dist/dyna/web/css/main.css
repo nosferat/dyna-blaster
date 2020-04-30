@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Dyna Main'; src: url('../fonts/dyna-main.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Dyna Micro'; src: url('../fonts/dyna-micro.ttf') format('truetype');
+}
+
+html {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  color: #AAA;
+  background: #000;
+}
+
+.dyna {
+  position: relative;
+  display: flex;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: none;
+  transform: scale(3);
+}

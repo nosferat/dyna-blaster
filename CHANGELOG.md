@@ -83,7 +83,7 @@
 
 ------
 
-## 0.0.14 - add player destruction and bots destruction
+## 0.0.14 - add player destruction and bots
 
 - Add control of overlap force in the case of a collision with the enemy
 
@@ -120,5 +120,11 @@
 ------
 
 ## 0.0.20 - add teleportation
+
+------
+
+## 0.1.0 - refactored code structure, add new scenes
+
+- Add scene models: *Stage2, Stage3, Stage4, Stage5*
 
 ------
