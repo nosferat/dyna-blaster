@@ -1,6 +1,7 @@
 /**
  * Abstract Sprite Class
  * 
+ * [isActive] - life cycle before destruction
  * [crop] - sprite size
  * [dx] [dy] - destination position (read only)
  * [ox] [oy] - offset position
@@ -20,6 +21,7 @@ class Sprite {
     this.dy = dy
     this.game = game
     this.grid = 16
+    this.isActive = true
     this.overlap = {default: 8, portal: 14}
     this.ox = 0
     this.oy = 0

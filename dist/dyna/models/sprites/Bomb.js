@@ -1,3 +1,7 @@
+/**
+ * [destroy] - direct call for a chain reaction
+ */
+
 import Animation from '../../../core/extensions/Animation.js'
 import Sprite from '../Sprite.js'
 
@@ -13,12 +17,18 @@ class Bomb extends Sprite {
   detonate(ms) {
     return new Promise(resolve => {
       this.animation.animate(this.frames, 250, true)
-      setTimeout(() => {
-        resolve()
-        this.remove()
-        this.game.sound.play('./sounds/bomb.ogg')
-      }, ms)
+      this.explode = resolve
+      this.timer = setTimeout(() => this.destroy(), ms)
     })
+  }
+
+  destroy() {
+    clearTimeout(this.timer)
+    setTimeout(() => {
+      this.explode()
+      this.remove()
+      this.game.sound.play('./sounds/bomb.ogg', 'bomb')
+    }, 100)
   }
 }
 

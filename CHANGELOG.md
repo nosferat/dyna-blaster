@@ -128,3 +128,10 @@
 - Add scene models: *Stage2, Stage3, Stage4, Stage5*
 
 ------
+
+## 0.1.1 - add сhain explosion
+
+- Fix the dying bot can kill a player
+- Fix the player disappears in some cases
+
+------

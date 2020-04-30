@@ -15,7 +15,7 @@ class Explosion {
   }
 
   canPropagate(items) {
-    return !items.some(item => ['bloc', 'wall', 'tile'].includes(item.name))
+    return !items.some(item => ['bloc', 'bomb', 'fire', 'tile', 'wall'].includes(item.name))
   }
 
   isBomb(dx, dy) {
@@ -90,7 +90,8 @@ class Explosion {
 
     for(let sprite of obstacles) {
       switch(sprite.name) {
-        case 'wall': sprite.destroy()
+        case 'bomb': sprite.destroy(); break // сhain explosion
+        case 'wall': sprite.destroy(); break
       }
     }
   }

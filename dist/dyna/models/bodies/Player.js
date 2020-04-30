@@ -23,7 +23,7 @@ class Player extends Body {
   }
 
   setDirection(e) {
-    if(this.updatePos) {
+    if(this.isActive) {
 
       this.px = Math.round(this.px) // fix: subpixel smoothing before a move
       this.py = Math.round(this.py)
@@ -47,27 +47,28 @@ class Player extends Body {
   }
 
   setBomb() {
-    if(this.updatePos) this.explosion.setBomb(this.dx, this.dy)
+    if(this.isActive) this.explosion.setBomb(this.dx, this.dy)
   }
 
   destroy() {
-    this.animation.animate(this.frames.doom, 150, false, () => this.reload())
+    this.animation.animate(this.frames.doom, 150, false, () => this.loadscene('name'))
+    this.isActive = false
     this.updatePos = false
-  }
-
-  reload() {
-    this.game.scene.loadscene(this.game.scene.active.name)
+    this.game.sound.play('./sounds/dying.ogg', 'dying')
   }
 
   teleport(collision) {
     this.animation.animate(this.frames.teleport.map(sx => [sx, 5]), 100, true)
+    this.isActive = false
     this.updatePos = false
-    this.game.sound.play('./sounds/portal.ogg')
+    this.game.sound.play('./sounds/portal.ogg', 'portal', () => this.loadscene('next'))
     
     this.px = collision.portal[0].target.px + this.ox
     this.py = collision.portal[0].target.py + this.oy // auto position
+  }
 
-    setTimeout(() => this.game.scene.loadscene(this.game.scene.active.next), 6500)
+  loadscene(type) {
+    this.game.scene.loadscene(this.game.scene.active[type])
   }
 
   update(time) {
@@ -93,7 +94,11 @@ class Player extends Body {
       const ox = overlap.x >= this.overlap.default 
       const oy = overlap.y >= this.overlap.default
 
-      if(ox && oy) this.destroy()
+      const enemy = collision.enemies[0].target
+
+      if(ox && oy && enemy.isActive) {
+        this.destroy()
+      }
     }
 
     if(collision.obstacles) {

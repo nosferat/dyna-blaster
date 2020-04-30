@@ -26,6 +26,7 @@ class Ballom extends Body {
 
   destroy() {
     this.animation.animate(this.frames.doom, 250, false, () => {this.setPoints(); this.remove()})
+    this.isActive = false
     this.updatePos = false
   }
 

@@ -16,7 +16,7 @@ class Bonus extends Sprite {
   }
 
   take() {
-    this.game.sound.play('./sounds/bonus.ogg')
+    this.game.sound.play('./sounds/bonus.ogg', 'bonus')
     this.remove()
 
     switch(this.sy) {

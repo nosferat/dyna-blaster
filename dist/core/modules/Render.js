@@ -22,11 +22,13 @@ class Render {
   }
 
   remove(sprite) {
-    this.list.splice(this.list.indexOf(sprite), 1)
+    const i = this.list.indexOf(sprite)
+    if(i >= 0) {
+      this.list.splice(i, 1)
+    }
   }
 
   clear() {
-    this.game.display.clear()
     this.list = []
   }
 
