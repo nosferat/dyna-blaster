@@ -135,3 +135,9 @@
 - Fix the player disappears in some cases
 
 ------
+
+## 0.1.2 - add activate teleport if all enemies are killed
+
+- Fix add bomb if the game is paused
+
+------

@@ -5,6 +5,7 @@ class Ballom extends Body {
     super(...arguments)
     this.crop = [18, 18]
     this.frames = {move:[1,2,1,0], doom:[0,0,1,2,3,4].map(sx => [sx, 1])}
+    this.group = 'enemies'
     this.name = 'ballom'
     this.obstacles = ['bloc', 'bomb', 'tile', 'wall']
     this.ox = -1
@@ -28,6 +29,7 @@ class Ballom extends Body {
     this.animation.animate(this.frames.doom, 250, false, () => {this.setPoints(); this.remove()})
     this.isActive = false
     this.updatePos = false
+    this.game.events.trigger('onEnemyKilled', {target: this})
   }
 
   update(time) {

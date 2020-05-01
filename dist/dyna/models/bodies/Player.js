@@ -23,7 +23,7 @@ class Player extends Body {
   }
 
   setDirection(e) {
-    if(this.isActive) {
+    if(this.isActive && !this.game.control.paused) {
 
       this.px = Math.round(this.px) // fix: subpixel smoothing before a move
       this.py = Math.round(this.py)
@@ -47,7 +47,9 @@ class Player extends Body {
   }
 
   setBomb() {
-    if(this.isActive) this.explosion.setBomb(this.dx, this.dy)
+    if(this.isActive && !this.game.control.paused) {
+      this.explosion.setBomb(this.dx, this.dy)
+    }
   }
 
   destroy() {
@@ -57,14 +59,13 @@ class Player extends Body {
     this.game.sound.play('./sounds/dying.ogg', 'dying')
   }
 
-  teleport(collision) {
+  teleport(portal) {
     this.animation.animate(this.frames.teleport.map(sx => [sx, 5]), 100, true)
+    this.px = this.ox + portal.px
+    this.py = this.oy + portal.py // auto position
     this.isActive = false
     this.updatePos = false
     this.game.sound.play('./sounds/portal.ogg', 'portal', () => this.loadscene('next'))
-    
-    this.px = collision.portal[0].target.px + this.ox
-    this.py = collision.portal[0].target.py + this.oy // auto position
   }
 
   loadscene(type) {
@@ -129,7 +130,11 @@ class Player extends Body {
       const ox = overlap.x >= this.overlap.portal
       const oy = overlap.y >= this.overlap.portal
 
-      if(ox && oy) return this.teleport(collision)
+      const portal = collision.portal[0].target
+
+      if(ox && oy && portal.isActive) {
+        return this.teleport(portal)
+      }
     }
 
     this.px = px

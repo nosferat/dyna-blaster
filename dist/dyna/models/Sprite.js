@@ -21,6 +21,7 @@ class Sprite {
     this.dy = dy
     this.game = game
     this.grid = 16
+    this.group = 'default'
     this.isActive = true
     this.overlap = {default: 8, portal: 14}
     this.ox = 0

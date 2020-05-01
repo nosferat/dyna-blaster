@@ -33,6 +33,7 @@ class Stage {
       tile: './graphics/tile.png',
       wall: './graphics/wall.png',
     }
+    this.game.events.add('onEnemyKilled', () => this.enemyKilled())
   }
 
   async load() {
@@ -143,6 +144,14 @@ class Stage {
 
   addstatus() {
     this.add(new Status(this.game, 0, 0, 0, 0))
+  }
+
+  enemyKilled() {
+    const enemies = sprite => sprite.group === 'enemies' && sprite.isActive
+
+    if(this.game.render.list.filter(enemies).length === 0) {
+      this.game.events.trigger('onEnemiesKilled')
+    }
   }
 
   add(sprite) {

@@ -6,6 +6,7 @@ class Boyon extends Body {
     this.crop = [18, 18]
     this.delay = 0
     this.frames = {move:[1,2,1,0], doom:[0,0,1,2,3,4,5,6].map(sx => [sx, 1])}
+    this.group = 'enemies'
     this.name = 'boyon'
     this.obstacles = ['bloc', 'bomb', 'tile', 'wall']
     this.ox = -1
@@ -30,6 +31,7 @@ class Boyon extends Body {
     this.animation.animate(this.frames.doom, 250, false, () => {this.setPoints(); this.remove()})
     this.isActive = false
     this.updatePos = false
+    this.game.events.trigger('onEnemyKilled', {target: this})
   }
 
   update(time) {
