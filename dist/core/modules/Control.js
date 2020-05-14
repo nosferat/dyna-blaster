@@ -13,6 +13,7 @@ class Control {
     document.addEventListener('keydown', e => this.update(e, true))
     document.addEventListener('keyup', e => this.update(e, false))
     document.addEventListener('visibilitychange', e => this.toggPause())
+    window.focus()
   }
 
   update(event, pressed) {

@@ -141,3 +141,7 @@
 - Fix add bomb if the game is paused
 
 ------
+
+## 0.1.3 - add focus after load game, update README
+
+------
