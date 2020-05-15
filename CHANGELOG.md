@@ -145,3 +145,7 @@
 ## 0.1.3 - add focus after load game, update README
 
 ------
+
+## 0.1.4 - add Google Analytics
+
+------
